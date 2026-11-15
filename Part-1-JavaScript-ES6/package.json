@@ -1,0 +1,21 @@
+{
+  "name": "hybridapp",
+  "version": "1.0.0",
+  "type":"module",
+  "description": "This is our university exercise project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YarbCry/HybridApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YarbCry/HybridApp/issues"
+  },
+  "homepage": "https://github.com/YarbCry/HybridApp#readme"
+}
