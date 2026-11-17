@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 2 Browser Demo</title>
+  </head>
+  <body>
+    <h1>Lesson 2 Browser Demo</h1>
+
+    <section id="background-demo">
+      <h2>Modern Link Action</h2>
+      <p>
+        This example uses an event listener instead of the legacy
+        <code>javascript:void(...)</code> hyperlink pattern.
+      </p>
+      <a id="actionLink" href="#background-demo">Change background</a>
+      <button id="resetBackgroundButton" type="button">
+        Reset background
+      </button>
+    </section>
+
+    <section>
+      <h2>Dialog Boxes</h2>
+    <!-- Each button demonstrates one built-in browser dialog. -->
+      <button id="alertButton" type="button">Show alert</button>
+      <button id="confirmButton" type="button">Show confirmation</button>
+      <button id="promptButton" type="button">Ask for a name</button>
+      <button id="ageButton" type="button">Ask for an age</button>
+    </section>
+
+    <p id="result" aria-live="polite">Choose an action.</p>
+
+    <!-- type="module" enables modern JavaScript module behavior. -->
+    <script type="module" src="./dialogs.js"></script>
+  </body>
+</html>

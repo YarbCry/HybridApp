@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 3 Events</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        line-height: 1.5;
+        margin: 2rem;
+      }
+
+      #box,
+      #outerBox {
+        border: 1px solid #333;
+        margin: 1rem 0;
+        padding: 1rem;
+      }
+
+      #mediaDemo {
+        display: block;
+        margin-top: 0.5rem;
+        max-width: 32rem;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="title">JavaScript Event Demo</h1>
+    <!-- These controls demonstrate click and one-time event listeners. -->
+    <button id="clickButton" type="button">Click here</button>
+    <button id="removeClickListenerButton" type="button">
+      Remove click listener
+    </button>
+    <button id="onceButton" type="button">Run once</button>
+
+    <!-- Mouse events update the content of this focusable box. -->
+    <div id="box" tabindex="0">
+      Press, release, move, or use the mouse wheel here.
+    </div>
+
+    <!-- The form demonstrates input, focus, blur, selection, and submit events. -->
+    <form id="userForm">
+      <label for="name">Name</label>
+      <input id="name" name="name" autocomplete="name" />
+      <button type="submit">Submit</button>
+    </form>
+
+    <!-- Clicking the inner button demonstrates target and bubbling phases. -->
+    <div id="outerBox">
+      Parent container
+      <button id="innerButton" type="button">Propagation demo</button>
+      <button id="stopPropagationButton" type="button">
+        Stop propagation
+      </button>
+    </div>
+
+    <!-- One listener on the list handles clicks from all child buttons. -->
+    <ul id="list">
+      <li><button type="button" data-id="1">Item 1</button></li>
+      <li><button type="button" data-id="2">Item 2</button></li>
+      <li><button type="button" data-id="3">Item 3</button></li>
+    </ul>
+
+    <!-- Choose a local file to trigger play, playing, pause, and waiting events. -->
+    <section>
+      <h2>Media Events</h2>
+      <label for="mediaFile">Choose a video or audio file</label>
+      <input id="mediaFile" type="file" accept="video/*,audio/*" />
+      <video id="mediaDemo" controls></video>
+    </section>
+
+    <p id="status" aria-live="polite">Interact with the page.</p>
+
+    <!-- The event handlers are kept in a separate JavaScript module. -->
+    <script type="module" src="./events.js"></script>
+  </body>
+</html>
