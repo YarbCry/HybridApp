@@ -14,6 +14,7 @@ export default function LessonsScreen() {
 
   const [lessonId, setLessonId] = useState(lessons[0].id);
   const [exampleId, setExampleId] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
 
   const lesson = lessons.find((l) => l.id === lessonId)!;
   // Wide layout always shows an example; narrow layout shows the list until one is tapped.
@@ -39,39 +40,70 @@ export default function LessonsScreen() {
   );
 
   const pills = (
-    <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 10 }}>
-      {lessons.map((l) => {
-        const active = l.id === lessonId;
-        return (
-          <Pressable
-            key={l.id}
-            accessibilityRole="button"
-            onPress={() => pickLesson(l.id)}
-            style={{
-              backgroundColor: active ? '#047857' : '#e2e8f0',
-              paddingHorizontal: 18,
-              paddingVertical: 10,
-              borderRadius: 999,
-            }}>
-            <Text style={{ color: active ? '#fff' : '#334155', fontWeight: '600' }}>Lesson {l.id}</Text>
-          </Pressable>
-        );
-      })}
-      {upcomingLessons.map((n) => (
-        <View
-          key={n}
-          style={{
-            backgroundColor: '#f1f5f9',
-            paddingHorizontal: 18,
-            paddingVertical: 10,
-            borderRadius: 999,
-            borderWidth: 1,
-            borderStyle: 'dashed',
-            borderColor: '#cbd5e1',
-          }}>
-          <Text style={{ color: '#94a3b8', fontWeight: '600' }}>Lesson {n} · soon</Text>
+    <View style={{ zIndex: 10 }}>
+      <Text style={{ fontSize: 12, fontWeight: '600', color: '#64748b', marginBottom: 6 }}>Filter by lesson</Text>
+      <Pressable
+        accessibilityRole="combobox"
+        accessibilityState={{ expanded: open }}
+        onPress={() => setOpen(!open)}
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          backgroundColor: '#fff',
+          borderWidth: 1,
+          borderColor: open ? '#047857' : '#cbd5e1',
+          borderRadius: 12,
+          paddingHorizontal: 14,
+          paddingVertical: 12,
+        }}>
+        <View style={{ flex: 1 }}>
+          <Text style={{ fontWeight: '700', color: '#0f172a' }}>Lesson {lesson.id}</Text>
+          <Text numberOfLines={1} style={{ color: '#64748b', fontSize: 13 }}>
+            {lesson.title}
+          </Text>
         </View>
-      ))}
+        <Text style={{ color: '#64748b', fontSize: 16 }}>{open ? '▴' : '▾'}</Text>
+      </Pressable>
+      {open && (
+        <View
+          style={{
+            marginTop: 6,
+            backgroundColor: '#fff',
+            borderWidth: 1,
+            borderColor: '#cbd5e1',
+            borderRadius: 12,
+            overflow: 'hidden',
+          }}>
+          {lessons.map((l) => {
+            const active = l.id === lessonId;
+            return (
+              <Pressable
+                key={l.id}
+                accessibilityRole="menuitem"
+                onPress={() => {
+                  pickLesson(l.id);
+                  setOpen(false);
+                }}
+                style={({ pressed }) => ({
+                  paddingHorizontal: 14,
+                  paddingVertical: 10,
+                  backgroundColor: active ? '#ecfdf5' : pressed ? '#f1f5f9' : '#fff',
+                })}>
+                <Text style={{ fontWeight: '600', color: active ? '#047857' : '#0f172a' }}>Lesson {l.id}</Text>
+                <Text numberOfLines={1} style={{ color: '#64748b', fontSize: 13 }}>
+                  {l.title}
+                </Text>
+              </Pressable>
+            );
+          })}
+          {upcomingLessons.map((n) => (
+            <View key={n} style={{ paddingHorizontal: 14, paddingVertical: 10 }}>
+              <Text style={{ color: '#94a3b8', fontWeight: '600' }}>Lesson {n} · soon</Text>
+            </View>
+          ))}
+        </View>
+      )}
     </View>
   );
 
